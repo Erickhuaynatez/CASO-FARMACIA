@@ -5,21 +5,24 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema oltp_farmacia
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema oltp_farmacia
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE DATABASE IF NOT EXISTS oltp_farmacia
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+USE oltp_farmacia;
 
 -- -----------------------------------------------------
--- Table `mydb`.`CLIENTE`
+-- Table `oltp_farmacia`.`CLIENTE`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`CLIENTE` ;
+DROP TABLE IF EXISTS `oltp_farmacia`.`CLIENTE` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`CLIENTE` (
+CREATE TABLE IF NOT EXISTS `oltp_farmacia`.`CLIENTE` (
   `idCLIENTE` INT NOT NULL,
   `NOMBRE` VARCHAR(45) NULL,
   `TIPO DOCUMENTO` VARCHAR(45) NULL,
@@ -27,17 +30,17 @@ CREATE TABLE IF NOT EXISTS `mydb`.`CLIENTE` (
   `EMAIL` VARCHAR(45) NULL,
   `FECHA_REGISTRO` DATE NULL,
   PRIMARY KEY (`idCLIENTE`),
-  UNIQUE INDEX `EMAIL_UNIQUE` (`EMAIL` ASC) VISIBLE,
-  UNIQUE INDEX `DOCUMENTO_UNIQUE` (`NUMERO DOCUMENTO` ASC) VISIBLE)
+  UNIQUE INDEX `EMAIL_UNIQUE` (`EMAIL` ASC) ,
+  UNIQUE INDEX `DOCUMENTO_UNIQUE` (`NUMERO DOCUMENTO` ASC) )
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`MARCA`
+-- Table `oltp_farmacia`.`MARCA`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`MARCA` ;
+DROP TABLE IF EXISTS `oltp_farmacia`.`MARCA` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`MARCA` (
+CREATE TABLE IF NOT EXISTS `oltp_farmacia`.`MARCA` (
   `idMARCA` INT NOT NULL,
   `NOMBRE` VARCHAR(45) NULL,
   `DESCRIPCION` VARCHAR(45) NULL,
@@ -47,11 +50,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`MEDICAMENTOS`
+-- Table `oltp_farmacia`.`MEDICAMENTOS`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`MEDICAMENTOS` ;
+DROP TABLE IF EXISTS `oltp_farmacia`.`MEDICAMENTOS` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`MEDICAMENTOS` (
+CREATE TABLE IF NOT EXISTS `oltp_farmacia`.`MEDICAMENTOS` (
   `idMEDICAMENTO` INT NOT NULL,
   `NOMBRE` VARCHAR(45) NULL,
   `DESCRIPCION` VARCHAR(45) NULL,
@@ -63,11 +66,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`UBICACION`
+-- Table `oltp_farmacia`.`UBICACION`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`UBICACION` ;
+DROP TABLE IF EXISTS `oltp_farmacia`.`UBICACION` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`UBICACION` (
+CREATE TABLE IF NOT EXISTS `oltp_farmacia`.`UBICACION` (
   `idUBICACION` INT NOT NULL,
   `DISTRITO` VARCHAR(45) NULL,
   `PROVINCIA` VARCHAR(45) NULL,
@@ -77,11 +80,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`TIPO TIENDA`
+-- Table `oltp_farmacia`.`TIPO TIENDA`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`TIPO TIENDA` ;
+DROP TABLE IF EXISTS `oltp_farmacia`.`TIPO TIENDA` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`TIPO TIENDA` (
+CREATE TABLE IF NOT EXISTS `oltp_farmacia`.`TIPO TIENDA` (
   `idTIPO TIENDA` INT NOT NULL,
   `TIPO` VARCHAR(45) NULL,
   PRIMARY KEY (`idTIPO TIENDA`))
@@ -89,12 +92,12 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`SEDE`
+-- Table `oltp_farmacia`.`SEDE`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`SEDE` ;
+DROP TABLE IF EXISTS `oltp_farmacia`.`SEDE` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`SEDE` (
-  `idSEDE` INT NULL,
+CREATE TABLE IF NOT EXISTS `oltp_farmacia`.`SEDE` (
+  `idSEDE` INT NOT NULL,
   `NOMBRE` VARCHAR(45) NULL,
   `DIRECCION` VARCHAR(45) NULL,
   `idUBICACION` INT NULL,
@@ -106,11 +109,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`DESPACHADOR`
+-- Table `oltp_farmacia`.`DESPACHADOR`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`DESPACHADOR` ;
+DROP TABLE IF EXISTS `oltp_farmacia`.`DESPACHADOR` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`DESPACHADOR` (
+CREATE TABLE IF NOT EXISTS `oltp_farmacia`.`DESPACHADOR` (
   `idDESPACHADOR` INT NOT NULL,
   `NOMBRE` VARCHAR(45) NULL,
   `APELLIDOS` VARCHAR(45) NULL,
@@ -123,11 +126,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`FECHA`
+-- Table `oltp_farmacia`.`FECHA`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`FECHA` ;
+DROP TABLE IF EXISTS `oltp_farmacia`.`FECHA` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`FECHA` (
+CREATE TABLE IF NOT EXISTS `oltp_farmacia`.`FECHA` (
   `idFecha` INT NOT NULL,
   `FECHA` DATE NULL,
   `MES` VARCHAR(20) NULL,
@@ -139,11 +142,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`MEDICO`
+-- Table `oltp_farmacia`.`MEDICO`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`MEDICO` ;
+DROP TABLE IF EXISTS `oltp_farmacia`.`MEDICO` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`MEDICO` (
+CREATE TABLE IF NOT EXISTS `oltp_farmacia`.`MEDICO` (
   `idMEDICO` INT NOT NULL,
   `CMP MEDICO` VARCHAR(45) NULL,
   PRIMARY KEY (`idMEDICO`))
@@ -151,12 +154,12 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`VENTAS`
+-- Table `oltp_farmacia`.`VENTAS`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`VENTAS` ;
+DROP TABLE IF EXISTS `oltp_farmacia`.`VENTAS` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`VENTAS` (
-  `idVenta` INT NULL,
+CREATE TABLE IF NOT EXISTS `oltp_farmacia`.`VENTAS` (
+  `idVenta` INT NOT NULL,
   `idFECHA` INT NULL,
   `idSEDE` INT NULL,
   `idDESPACHADOR` INT NULL,
@@ -167,11 +170,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`DETALLE VENTAS`
+-- Table `oltp_farmacia`.`DETALLE VENTAS`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`DETALLE VENTAS` ;
+DROP TABLE IF EXISTS `oltp_farmacia`.`DETALLE VENTAS` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`DETALLE VENTAS` (
+CREATE TABLE IF NOT EXISTS `oltp_farmacia`.`DETALLE VENTAS` (
   `idDETALLE VENTA` INT NOT NULL,
   `idVENTA` INT NULL,
   `idMEDICAMENTIO` INT NULL,
